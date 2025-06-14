@@ -1,13 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      /* Loader styles */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at top left, #f0f0f0, #808080);
+      }
+
+      #root {
+        display: none;
+      }
+    </style>
+
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/" href="/fav.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image" href="fav.png" />
     <title>Clock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
+
   <body>
+    <div id="loader">
+    </div>
+
     <div id="root"></div>
+
+    <script type="module">
+      const start = Date.now();
+
+      const hideLoader = () => {
+        const elapsed = Date.now() - start;
+        const minDelay = 0;
+
+        const finish = () => {
+          document.getElementById("loader").classList.add("fade-out");
+          document.getElementById("root").style.display = "block";
+        };
+
+        if (elapsed < minDelay) {
+          setTimeout(finish, minDelay - elapsed);
+        } else {
+          finish();
+        }
+      };
+
+      const waitForReact = () => {
+        const root = document.getElementById("root");
+        if (root && root.children.length > 0) {
+          hideLoader();
+        } else {
+          requestAnimationFrame(waitForReact);
+        }
+      };
+
+      window.addEventListener("DOMContentLoaded", waitForReact);
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
