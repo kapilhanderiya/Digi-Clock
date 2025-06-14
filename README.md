@@ -26,7 +26,7 @@ A beautiful animated clock interface built with **React** and **Tailwind CSS**. 
 
 ## 🚀 Live Demo
 
-> Coming Soon
+[> Visit](https://digi-clock-m6390udpo-kapil-handeriyas-projects.vercel.app/)
 
 ---
 
